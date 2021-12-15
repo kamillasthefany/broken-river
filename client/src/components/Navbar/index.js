@@ -23,7 +23,7 @@ const Navbar = (props) => {
   const classes = useStyles();
   const { titulo } = props;
   return (
-    <AppBar>
+    <AppBar position='static'>
       <ToolbarCustom>
         <Typography variant="h6" className={classes.logoLg}>
           {titulo}
