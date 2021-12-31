@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-// import { Container } from './styles';
+//import { Container } from './styles';
 import {
-  Box, Typography, Modal,
-  Fab,
-  FormControlLabel,
-  FormLabel,
+  Typography, Modal,
   makeStyles,
   Container,
   TextField,
-  RadioGroup,
-  Radio,
   Button,
-  MenuItem,
 } from '@material-ui/core';
+import Snackbar from '../Snackbar';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -36,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
       width: "100vw",
       height: "100vh",
     },
+    "&:focus": {
+      outline: "none"
+    }
   },
   form: {
     padding: theme.spacing(2),
@@ -47,10 +45,9 @@ const useStyles = makeStyles((theme) => ({
 
 const ModalCustom = (props) => {
 
-  // const { open, setOpen } = props;
+  const { onClick, open, setOpen } = props;
 
   const classes = useStyles();
-  const [open, setOpen] = useState(true);
   const [openAlert, setOpenAlert] = useState(false);
 
   const handleClose = (event, reason) => {
@@ -58,75 +55,79 @@ const ModalCustom = (props) => {
       return;
     }
 
-    setOpenAlert(false);
+    setOpen(false);
   };
 
+
+
   return (
-    <Modal open={open}>
-      <Container className={classes.container}>
-        <form className={classes.form} autoComplete="off">
-          <div className={classes.item}>
-            <Typography variant="h6" color="primary">
-              Cadastro
-            </Typography>
-          </div>
-          <div className={classes.item}>
+    <>
+      <Snackbar open={openAlert} setOpen={setOpenAlert} />
+      <Modal open={open} onClose={handleClose}>
+        <Container className={classes.container}>
+          <form className={classes.form} autoComplete="off">
+            <div className={classes.item}>
+              <Typography variant="h6" color="primary">
+                Cadastro
+              </Typography>
+            </div>
+            <div className={classes.item}>
+              <TextField
+                rows={4}
+                InputLabelProps={{ shrink: true }}
+                defaultValue="teste"
+                variant="outlined"
+                label="Link"
+                size="small"
+                style={{ width: "100%" }}
+              />
+              <br />
+              <br />
+              <TextField
+                rows={4}
+                InputLabelProps={{ shrink: true }}
+                defaultValue="teste"
+                variant="outlined"
+                label="Outline"
+                size="small"
+                style={{ width: "100%" }}
+              />
+            </div>
+            <div className={classes.item}>
+              <TextField
+                id="outlined-multiline-static"
+                multiline
+                rows={4}
+                placeholder='Digite aqui as tags'
+                variant="outlined"
+                label="Tags"
+                size="small"
+                InputLabelProps={{ shrink: true }}
+                style={{ width: "100%" }}
+              />
+            </div>
 
-            <TextField
-              rows={4}
-              InputLabelProps={{ shrink: true }}
-              defaultValue="teste"
-              variant="outlined"
-              label="Link"
-              size="small"
-              style={{ width: "100%" }}
-            />
-            <br />
-            <br />
-            <TextField
-              rows={4}
-              InputLabelProps={{ shrink: true }}
-              defaultValue="teste"
-              variant="outlined"
-              label="Outline"
-              size="small"
-              style={{ width: "100%" }}
-            />
-          </div>
-          <div className={classes.item}>
-            <TextField
-              id="outlined-multiline-static"
-              multiline
-              rows={4}
-              placeholder='Digite aqui as tags'
-              variant="outlined"
-              label="Tags"
-              size="small"
-              InputLabelProps={{ shrink: true }}
-              style={{ width: "100%" }}
-            />
-          </div>
-
-          <div className={classes.item}>
-            <Button
-              variant="outlined"
-              color="primary"
-              style={{ marginRight: 20 }}
-              onClick={() => setOpenAlert(true)}
-            >
-              Criar
-            </Button>
-            <Button
-              variant="outlined"
-              color="secondary"
-              onClick={() => setOpen(false)}
-            >
-              Cancelar
-            </Button>
-          </div>
-        </form>
-      </Container>
-    </Modal>
+            <div className={classes.item}>
+              <Button
+                variant="outlined"
+                color="primary"
+                style={{ marginRight: 20 }}
+                onClick={() => setOpenAlert(true)}
+              >
+                Criar
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={() => setOpen(false)}
+              >
+                Cancelar
+              </Button>
+            </div>
+          </form>
+        </Container>
+      </Modal>
+    </>
   )
 }
 

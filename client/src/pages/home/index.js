@@ -9,10 +9,8 @@ export default function Home() {
   return (
     <div>
       <Navbar titulo="titulo" />
+      <br />
       <Grid container>
-        <br />
-        <br />
-        <br />
         <br />
         <Button
           variant="contained"
@@ -20,7 +18,7 @@ export default function Home() {
           onClick={() => setOpen(!open)}
         >Teste
         </Button>
-        <ModalCustom open={open} />
+        <ModalCustom open={open} setOpen={setOpen} />
       </Grid>
     </div>
   )
