@@ -11,6 +11,7 @@ const Snackbar = (props) => {
   const { open, setOpen } = props;
   const handleCloseAlert = (event, reason) => {
     if (reason === "clickaway") {
+      console.log('away');
       return;
     }
 
